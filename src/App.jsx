@@ -52,7 +52,11 @@ function App() {
     return null; 
   }
 
-
+  const resetPlay = () =>{
+    setBoard(Array(9).fill(null))
+    setTurn(TURNS.X)
+    setWinner(null)
+  }
 
 
 
@@ -103,6 +107,9 @@ function App() {
               <header className="win">
                 {winner && <Square>{winner}</Square>}
               </header>
+              <footer>
+                <button onClick={resetPlay}>Empezar de nuevo</button>
+              </footer>
               </div>
             </section>
           )
