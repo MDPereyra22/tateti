@@ -58,7 +58,9 @@ function App() {
     setWinner(null)
   }
 
-
+  const checkEndGame=(newBoard)=>{
+    return newBoard.every((square) => square !== null)
+  }
 
   const updateBoard = (index) => {
 
@@ -73,12 +75,15 @@ function App() {
     const newWinner = checkWinner(newBoard)
     if(newWinner){
       setWinner(newWinner)
+    } else if (checkEndGame(newBoard)){
+      setWinner(false)
     }
   }
 
   return (
     <main className="board">
       <h1>Ta-Te-Ti</h1>
+      <button onClick={resetPlay}>Empezar de nuevo</button>
       <section className="game">
         {board.map((_, index) => {
           return (
