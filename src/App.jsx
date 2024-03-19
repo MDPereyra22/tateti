@@ -5,6 +5,7 @@ const TURNS = {
   O: 'o',
 }
 
+// eslint-disable-next-line react/prop-types
 const Square = ({ children, isSelected, updateBoard, index }) => {
   const className = `square ${isSelected ? 'is-selected' : ''}`
 
@@ -34,7 +35,7 @@ function App() {
 
   const [board, setBoard] = useState(Array(9).fill(null))
   const [turn, setTurn] = useState(TURNS.X)
-  const [winnner, setWinner] = useState(null)
+  const [winner, setWinner] = useState(null)
 
 
   const checkWinner = (boardToCheck) => {
@@ -57,7 +58,7 @@ function App() {
 
   const updateBoard = (index) => {
 
-    if (board[index] || winnner) return
+    if (board[index] || winner) return
     const newBoard = [...board]
     newBoard[index] = turn
     setBoard(newBoard)
@@ -68,7 +69,6 @@ function App() {
     const newWinner = checkWinner(newBoard)
     if(newWinner){
       setWinner(newWinner)
-      alert(`Ha ganado ${newWinner}`)
     }
   }
 
@@ -92,6 +92,22 @@ function App() {
         <Square isSelected={turn === TURNS.X}>{TURNS.X}</Square>
         <Square isSelected={turn === TURNS.O}>{TURNS.O}</Square>
       </section>
+
+        {
+          winner !== null && (
+            <section className="winner">
+              <div className="text">
+                <h2>
+                  {winner === false ? 'Empate' : 'Ganó'}
+                </h2>
+              <header className="win">
+                {winner && <Square>{winner}</Square>}
+              </header>
+              </div>
+            </section>
+          )
+        }
+
     </main>
   )
 }
